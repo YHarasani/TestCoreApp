@@ -30,6 +30,14 @@
 
         </div>
 
+        <div>
+            <input type="file" asp-for="clientFile" onchange="loadFile(event)" />
+            @if (Model.imagePath != null)
+            {
+                <img id="myImg" src="~/images/@Model.imagePath" height="200" />
+            }
+        </div>
+
         <br />
         <hr />
 
@@ -42,4 +50,14 @@
 
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />
+    <script>
+        var loadFile = function (event) {
+            var reader = new FileReader();
+            reader.onload = function () {
+                var myImg = document.getElementById('myImg');
+                myImg.src = reader.result;
+            }
+            reader.readAsDataURL(event.target.files[0]);
+        }
+    </script>
 }
