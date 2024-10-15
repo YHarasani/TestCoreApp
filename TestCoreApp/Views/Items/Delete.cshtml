@@ -29,6 +29,16 @@
 
         <br />
         <hr />
+
+        <div>
+            @if (Model.imagePath != null)
+            {
+                <img id="myImg" src="~/images/@Model.imagePath" height="200" />
+            }
+        </div>
+
+        <br />
+        <hr />
         <button type="submit" class="btn btn-primary" style="width:180px">Delete</button>
         <a asp-action="Index" asp-controller="Items" class="btn btn-primary" style="width:180px">
             Back To Items

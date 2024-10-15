@@ -3,7 +3,7 @@
     ViewData["Title"] = "Edit";
 }
 
-<form method="post">
+<form method="post" enctype="multipart/form-data">
     <div class="border p-3 mt-4">
         <div class="row pb-2">
             <h2 class="">Edit Item</h2>
@@ -29,6 +29,9 @@
             <span asp-validation-for="CategoryId" class="text-danger"></span>
 
         </div>
+
+        <br />
+        <hr />
 
         <div>
             <input type="file" asp-for="clientFile" onchange="loadFile(event)" />

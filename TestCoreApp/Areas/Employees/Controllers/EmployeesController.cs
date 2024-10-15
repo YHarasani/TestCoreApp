@@ -11,7 +11,7 @@ using TestCoreApp.Models;
 
 namespace TestCoreApp.Areas.Employees.Controllers
 {
-    [Area("Employees"), Authorize]
+    [Area("Employees"), Authorize(Roles = clsRoles.roleAdmin)]
     public class EmployeesController : Controller
     {
         private readonly AppDbContext _context;

@@ -8,7 +8,7 @@ using IHostingEnvironment = Microsoft.AspNetCore.Hosting.IHostingEnvironment;
 
 namespace TestCoreApp.Controllers
 {
-    [Authorize]
+    [Authorize(Roles = clsRoles.roleAdmin)]
     public class ItemsController : Controller
     {
         public ItemsController(AppDbContext db, IHostingEnvironment host)
@@ -107,9 +107,18 @@ namespace TestCoreApp.Controllers
 
             if (ModelState.IsValid)
             {
+                string fileName = string.Empty;
+                if (item.clientFile != null)
+                {
+                    string myUpload = Path.Combine(_host.WebRootPath, "images");
+                    fileName = item.clientFile.FileName;
+                    string fullPath = Path.Combine(myUpload, fileName);
+                    item.clientFile.CopyTo(new FileStream(fullPath, FileMode.Create));
+                    item.imagePath = fileName;
+                }
                 _db.Items.Update(item);
                 _db.SaveChanges();
-                TempData["successData"] = "Item has been edited successfully";
+                TempData["successData"] = "Item has been added successfully";
                 return RedirectToAction("Index");
             }
             else
